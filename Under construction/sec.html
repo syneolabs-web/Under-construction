@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oops! Under Construction</title>
+    <!-- We use Tailwind CSS to easily style our page -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            navy: '#19204d',   /* Very dark blue for text and borders */
+                            blue: '#3b53cc',   /* Main blue color */
+                            yellow: '#ffcd00', /* Bright yellow for caution signs */
+                            grayText: '#8b92b2', /* Soft gray for simple text */
+                            bgShapes: '#f0f4fb', /* Very light blue for background shapes */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #19204d;
+            overflow-x: hidden;
+        }
+
+        /* --- Fun Animations to make it feel alive! --- */
+
+        /* 1. Swinging Crane Sign */
+        /*@keyframes swing {
+            0% { transform: rotate(-8deg); }
+            50% { transform: rotate(8deg); }
+            100% { transform: rotate(-8deg); }
+        }
+        .anim-swing {
+            transform-origin: top center;
+            animation: swing 3.5s ease-in-out infinite;
+        }*/
+
+        @keyframes swing {
+    0% { transform: rotate(-5deg); } 
+    50% { transform: rotate(5deg); }  
+    100% { transform: rotate(-5deg); }
+}
+
+.anim-swing {
+    /*transform-origin: top center;*/
+    animation: swing 6s ease-in-out infinite; 
+}
+
+        /* 2. Glowing Laptop Screen */
+        @keyframes screen-pulse {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; }
+        }
+        .anim-screen {
+            animation: screen-pulse 4s ease-in-out infinite;
+        }
+
+        /* 3. Sliding Caution Tape */
+        @keyframes slide-tape {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 0; }
+        }
+        .tape-pattern {
+            background-image: repeating-linear-gradient(
+                45deg,
+                #ffcd00,
+                #ffcd00 20px,
+                #19204d 20px,
+                #19204d 40px
+            );
+            background-size: 56.5px 56.5px;
+            animation: slide-tape 2s linear infinite;
+        }
+
+        /* 4. Little Guy Typing (Arms moving) */
+        @keyframes type-left {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-10deg); }
+        }
+        @keyframes type-right {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
+        }
+        .anim-type-l {
+            transform-origin: top left;
+            animation: type-left 0.3s ease-in-out infinite;
+        }
+        .anim-type-r {
+            /*transform-origin: top right;*/
+            animation: type-right 0.25s ease-in-out infinite;
+            animation-delay: 0.1s;
+        }
+
+        
+        
+        /* Body bobbing up and down while walking */
+        /*@keyframes bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }*/
+        /* .anim-bob { */
+           /* animation: bob 0.5s ease-in-out infinite;*/
+        /* }* */
+
+        /* 6. Megaphone Sound Waves */
+        @keyframes wave {
+            0% { opacity: 0; transform: scale(0.5) translateX(-5px); }
+            30% { opacity: 1; }
+            100% { opacity: 0; transform: scale(1.2) translateX(10px); }
+        }
+        .anim-wave-1 { animation: wave 1.5s linear infinite; }
+        .anim-wave-2 { animation: wave 1.5s linear 0.5s infinite; }
+
+        /* The hidden contact pop-up box */
+        #contactModal {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #contactModal.show {
+            display: flex;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans relative">
+
+    <!-- Top Menu Bar -->
+    <header class="w-full absolute top-0 left-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex justify-between items-center">
+            
+            <!-- Logo area -->
+            <a href="https://syneolabs.com" class="flex items-center gap-3 group">
+    <!-- Yo tapai ko logo ko picture ho -->
+    <img src="syneolabs.png" alt="Syneo Logo" class="h-14 w-auto transition-transform duration-300 group-hover:scale-105">
+    
+    <!-- Yo tapai le bhannu bhako 'Syneo Labs' lekheko text ho -->
+    <span class="font-extrabold text-xl tracking-[0.25em] uppercase text-[#19204d]">Syneo Labs</span>
+</a>
+            <!-- Links for big screens -->
+            <nav class="hidden md:flex items-center gap-8 text-[15px] font-medium text-brand-grayText">
+                
+                <!-- Contact Us opens the pop-up -->
+                <button onclick="toggleModal()" class="text-brand-navy font-bold hover:text-brand-blue transition-colors">Contact us</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Page Content -->
+    <main class="flex-grow flex items-center justify-center pt-28 lg:pt-0 relative w-full max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-4">
+            
+            <!-- Left Side: Big Text and Button -->
+            <div class="w-full lg:w-5/12 flex flex-col items-center lg:items-start text-center lg:text-left z-20 pb-16 lg:pb-0">
+                <h1 class="text-7xl md:text-8xl lg:text-[110px] font-black text-brand-navy leading-none mb-2 tracking-tight">
+                    Oops!
+                </h1>
+                <h2 class="text-4xl md:text-5xl font-bold text-brand-navy mb-6 tracking-tight">
+                    Under construction
+                </h2>
+                <p class="text-brand-grayText text-base md:text-[17px] mb-10 max-w-md leading-relaxed">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                </p>
+                <!-- This button opens our contact pop-up -->
+                <button onclick="toggleModal()" class="bg-[#2a3c99] text-white text-sm font-bold tracking-widest px-8 py-4 rounded-full shadow-lg hover:bg-brand-blue transform hover:-translate-y-1 transition-all duration-300 uppercase">
+                    More Info
+                </button>
+            </div>
+
+            <!-- Right Side: The Cool Moving Picture (SVG) -->
+            <div class="w-full lg:w-7/12 flex justify-center items-center relative select-none pointer-events-none">
+                <svg viewBox="0 0 900 600" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <!-- Laptop screen color change -->
+                        <linearGradient id="screenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#2a3c99" />
+                            <stop offset="100%" stop-color="#19204d" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Background shapes -->
+                    <g>
+                        <!-- Big light blue splash shape behind everything -->
+                        <path d="M 100,450 C 50,250 250,120 500,150 C 750,180 850,350 800,500 C 750,600 150,650 100,450 Z" fill="#f0f4fb" />
+                        
+                        <!-- Simple buildings far away -->
+                        <g fill="#e2e6f3">
+                            <rect x="250" y="280" width="60" height="220" rx="4" />
+                            <rect x="330" y="320" width="40" height="180" rx="4" />
+                            <rect x="390" y="230" width="80" height="270" rx="4" />
+                            <rect x="650" y="330" width="45" height="170" rx="4" />
+                        </g>
+
+                        <!-- A simple round tree -->
+                        <g transform="translate(180, 400)">
+                            <rect x="-3" y="20" width="6" height="80" fill="#19204d" />
+                            <circle cx="0" cy="20" r="35" fill="#5a75f5" opacity="0.9" />
+                            <!-- Little branches inside the tree -->
+                            <path d="M 0,30 L 10,15 M 0,50 L -8,35 M 0,70 L 6,55" stroke="#19204d" stroke-width="2" stroke-linecap="round" />
+                        </g>
+                    </g>
+
+                    <!-- The floor line -->
+                    <line x1="80" y1="500" x2="820" y2="500" stroke="#19204d" stroke-width="3" stroke-linecap="round" />
+
+                    <!-- The Giant Laptop -->
+                    <g transform="translate(40, -30)">
+                        <!-- Back cover of screen -->
+                        <path d="M 230,260 L 670,260 C 680,260 690,270 690,280 L 690,520 L 210,520 L 210,280 C 210,270 220,260 230,260 Z" fill="#3b53cc" />
+                        <!-- Inside part of screen -->
+                        <rect x="210" y="260" width="480" height="260" rx="15" fill="#19204d" />
+                        <!-- The glowing part -->
+                        <rect x="225" y="275" width="450" height="230" rx="5" fill="url(#screenGrad)" class="anim-screen" />
+                        
+                        <!-- Bottom keyboard part of laptop -->
+                        <path d="M 180,520 L 720,520 C 730,520 740,528 740,538 L 740,542 C 740,548 735,553 728,553 L 172,553 C 165,553 160,548 160,542 L 160,538 C 160,528 170,520 180,520 Z" fill="#3b53cc" />
+                        <path d="M 160,542 L 740,542 L 728,553 L 172,553 Z" fill="#19204d" opacity="0.8" />
+                    </g>
+
+                    <!-- The Tall Crane -->
+                    <g transform="translate(40, -50)">
+                        <!-- Straight pole -->
+                        <rect x="700" y="150" width="25" height="430" fill="#3b53cc" />
+                        <rect x="700" y="150" width="10" height="430" fill="#2a3c99" /> 
+                        <!-- Crane patterns -->
+                        <path d="M 700,170 L 725,195 M 700,195 L 725,220 M 700,220 L 725,245 M 700,245 L 725,270 M 700,270 L 725,295 M 700,295 L 725,320 M 700,320 L 725,345 M 700,345 L 725,370 M 700,370 L 725,395 M 700,395 L 725,420 M 700,420 L 725,445 M 700,445 L 725,470 M 700,470 L 725,495 M 700,495 L 725,520 M 700,520 L 725,545 M 700,545 L 725,570" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.6"/>
+                        
+                        <!-- Top pole -->
+                        <rect x="520" y="120" width="240" height="15" fill="#3b53cc" />
+                        <!-- Box for driver -->
+                        <rect x="680" y="135" width="45" height="50" rx="5" fill="#3b53cc" />
+                        <rect x="685" y="140" width="20" height="25" rx="3" fill="#19204d" />
+                    </g>
+
+                    <!-- The Swinging Caution Sign -->
+                    <g transform="translate(565, 85)">
+                        <g class="anim-swing">
+                            <!-- String holding sign -->
+                            <line x1="0" y1="0" x2="0" y2="90" stroke="#19204d" stroke-width="3" />
+                            <!-- Hook -->
+                            <path d="M 0,90 C 15,90 15,110 0,110 C -5,110 -10,105 -10,100" fill="none" stroke="#19204d" stroke-width="4" stroke-linecap="round"/>
+                            
+                            <!-- Yellow Diamond Sign -->
+                            <g transform="translate(0, 160)">
+                                <rect x="-55" y="-55" width="110" height="110" rx="10" fill="#ffcd00" stroke="#19204d" stroke-width="5" transform="rotate(45)" />
+                                <!-- Exclamation point (!) -->
+                                <rect x="-6" y="-30" width="12" height="40" rx="6" fill="#19204d" />
+                                <circle cx="0" cy="25" r="7" fill="#19204d" />
+                            </g>
+                        </g>
+                    </g>
+
+                    <!-- Striped Caution Tape -->
+                    <g transform="translate(40, -30)">
+                        <foreignObject x="210" y="400" width="480" height="35">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="w-full h-full tape-pattern border-y-[3px] border-brand-navy"></div>
+                        </foreignObject>
+                    </g>
+
+                    <!-- Traffic Cones on the ground -->
+                    <g transform="translate(280, 455)">
+                        <path d="M 12,0 L 25,45 L -1,45 Z" fill="#ffcd00" />
+                        <path d="M 8,12 L 16,12 L 20,25 L 4,25 Z" fill="#ffffff" />
+                        <ellipse cx="12" cy="45" rx="20" ry="5" fill="#ffcd00" />
+                    </g>
+                    
+                    <g transform="translate(680, 455)">
+                        <path d="M 12,0 L 25,45 L -1,45 Z" fill="#ffcd00" />
+                        <path d="M 8,12 L 16,12 L 20,25 L 4,25 Z" fill="#ffffff" />
+                        <ellipse cx="12" cy="45" rx="20" ry="5" fill="#ffcd00" />
+                    </g>
+
+                    <!-- The characters working -->
+                    
+                    <!-- 1. The guy sitting on top of the screen -->
+                    <g transform="translate(260, 180)">
+                        <!-- Dangling legs -->
+                        <path d="M 25,50 L 15,80 L 5,75" fill="none" stroke="#19204d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M 35,50 L 32,75 L 42,75" fill="none" stroke="#19204d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        
+                        <!-- Body -->
+                        <path d="M 15,15 L 40,15 C 45,15 48,25 45,35 L 40,55 L 20,55 L 12,35 C 10,25 12,15 15,15 Z" fill="#e2e8f0" />
+                        
+                        <!-- Head and Hard Hat -->
+                        <circle cx="28" cy="-5" r="10" fill="#ffcdba" /> 
+                        <path d="M 15,-5 C 15,-18 41,-18 41,-5 L 45,-3 C 45,-1 41,-1 38,-3 L 15,-5 Z" fill="#ffcd00" />
+                        
+                        <!-- Small laptop he is using -->
+                        <g transform="translate(-5, 30)">
+                            <rect x="0" y="5" width="25" height="15" rx="2" fill="#19204d" transform="rotate(-15)" />
+                            <polygon points="5,20 28,25 22,32 -3,25" fill="#3b53cc" />
+                        </g>
+
+                        <!-- Moving arms to type -->
+                        <path d="M 20,20 L 5,35" fill="none" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round" class="anim-type-l"/>
+                        <path d="M 38,20 L 22,35" fill="none" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round" class="anim-type-r"/>
+                    </g>
+
+                    
+                </svg>
+            </div>
+        </div>
+    </main>
+
+    <!-- This is the special Pop-up Box for Contact Info -->
+    <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center backdrop-blur-sm">
+    <div class="bg-white rounded-2xl p-8 max-w-sm w-full mx-4 shadow-2xl relative text-center">
+        <!-- Close button -->
+        <button onclick="toggleModal()" class="absolute top-4 right-4 text-brand-grayText hover:text-brand-navy">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        
+        <h3 class="text-2xl font-bold text-brand-navy mb-2">Get in touch!</h3>
+        <p class="text-brand-grayText mb-6 text-sm">We are still building, but you can talk to us here:</p>
+        
+        <div class="flex flex-col gap-4">
+            <!-- WhatsApp Link -->
+            <a href="https://wa.me/9779746221982" target="_blank" class="flex items-center justify-center gap-3 w-full bg-[#25D366] text-white py-3 rounded-xl hover:bg-[#1ebe57] transition-colors">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.031 0C5.385 0 0 5.388 0 12.04c0 2.12.553 4.19 1.603 6.012L.15 23.366l5.445-1.428A11.966 11.966 0 0 0 12.031 24c6.645 0 12.03-5.39 12.03-12.04S18.677 0 12.031 0zm-1.144 19.467h-.002a9.92 9.92 0 0 1-5.06-1.378l-.363-.214-3.766.986.999-3.672-.235-.374a9.944 9.944 0 0 1-1.52-5.32C.94 4.542 4.966.513 10.887.513c2.87 0 5.567 1.118 7.596 3.148 2.03 2.03 3.148 4.726 3.148 7.596 0 5.954-4.846 10.796-10.744 10.796zM16.8 15.11c-.26-.13-1.536-.758-1.774-.845-.238-.088-.412-.13-.585.13-.174.26-.672.845-.823 1.018-.15.174-.303.195-.563.065-.26-.13-1.096-.404-2.086-1.288-.772-.69-1.294-1.543-1.445-1.803-.15-.26-.016-.4.113-.53.118-.117.26-.303.39-.455.13-.15.174-.26.26-.433.088-.174.044-.326-.022-.456-.065-.13-.585-1.41-.8-1.93-.21-.508-.424-.438-.585-.446-.15-.008-.326-.01-.5-.01-.174 0-.455.065-.693.325-.238.26-.91 89-1.95 2.167-1.06 3.076-1.06 3.076-1.06.26 0 .693.087 1.083.26s.845.412 1.256.412c.412 0 .585-.13.823-.433.238-.303.238-.563.174-.618-.065-.054-.238-.087-.498-.217z"/></svg>
+                <div class="text-left">
+                    <div class="font-bold text-base leading-tight">WhatsApp Us</div>
+                    <div class="text-sm font-normal opacity-90">+977 9746221982</div>
+                </div>
+            </a>
+            
+            <!-- Email Link -->
+            <a href="mailto:hello@syneolabs.com" class="flex items-center justify-center gap-3 w-full bg-brand-navy text-white py-3 rounded-xl hover:bg-brand-blue transition-colors">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <div class="text-left">
+                    <div class="font-bold text-base leading-tight">Email Us</div>
+                    <div class="text-sm font-normal opacity-90">hello@syneolabs.com</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+    <!-- Small script to open and close our pop-up -->
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById('contactModal');
+            if (modal.classList.contains('show')) {
+                modal.classList.remove('show');
+                setTimeout(() => { modal.style.display = 'none'; }, 300); // Wait for fade out
+            } else {
+                modal.style.display = 'flex';
+                // Small delay to make the fade-in effect work
+                setTimeout(() => { modal.classList.add('show'); }, 10);
+            }
+        }
+    </script>
+</body>
+</html>
